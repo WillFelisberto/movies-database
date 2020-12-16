@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
 import { getPopularMovie } from './api/services';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
-import { IMG_URL } from './utils';
+import Card from './components/Card';
+import GlobalStyle from './theme/globalStyles';
+import { Cards, ContainerBody } from './theme/styled';
 
 export default function App() {
 	const [movies, setMovies] = useState([]);
@@ -29,28 +30,23 @@ export default function App() {
 
 	return (
 		<>
+			<GlobalStyle />
 			{loading ? (
-				<div className='App'>
-					<header className='App-header'>
-						{movies.results.map((el) => {
-							return (
-								<>
-									<img
-										alt={el.title}
-										src={IMG_URL + el.poster_path}
-									/>
-									<p key={el.id}>{el.title}</p>
-								</>
-							);
-						})}
-
+				<>
+					<header className='App-header'></header>
+					<ContainerBody>
+						<Cards>
+							{movies.results.map((el) => (
+								<Card key={el.key} movie={el} />
+							))}
+						</Cards>
 						<Pagination
 							onChange={handlePageClick}
 							current={pageCount}
 							total={movies.total_pages}
 						/>
-					</header>
-				</div>
+					</ContainerBody>
+				</>
 			) : null}
 		</>
 	);
