@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 
-export const ContainerHeader = styled.div`
-	margin-bottom: 15px;
-	padding: 50px;
+export const ContainerHeader = styled.header`
 	text-align: center;
-	background-color: #d9d9d9;
+	color: white;
 	font-size: 25px;
 
 	a {

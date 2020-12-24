@@ -4,11 +4,11 @@ export const ContainerCard = styled.div`
 	display: inline-block;
 	flex-grow: 1;
 	margin: 20px;
-	background-color: #d9d9d9;
-	box-shadow: 0px 0px 3px 0px;
 	text-align: center;
 	border-radius: 10px;
-
+	color: white;
+	padding-bottom: 45px;
+	margin-bottom: 80px;
 	@media only screen and (min-width: 768px) {
 		max-width: 50%;
 	}
@@ -18,8 +18,44 @@ export const ContainerCard = styled.div`
 	}
 
 	img {
-		border-top-left-radius: 10px;
-		border-top-right-radius: 10px;
+		box-shadow: 0px 0px 20px 0px #000000de;
+
 		width: 100%;
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
+`;
+
+export const TituloFilme = styled.p`
+	width: 90%;
+	margin: 6px 0px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-align: start;
+	text-overflow: ellipsis;
+`;
+
+export const ContainerGeneros = styled.div`
+	display: flex;
+
+	p {
+		margin: 0px;
+		font-size: 14px;
+	}
+`;
+
+export const Nota = styled.div`
+	position: absolute;
+	div {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		background-color: #fb0404;
+		padding: 6px 3px;
+		font-weight: bold;
+		border-bottom-right-radius: 5px;
+
+		background-image: linear-gradient(#fd9102, #c97708);
 	}
 `;

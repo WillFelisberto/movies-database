@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { getPopularMovie, getGenres } from './api/services';
-import Pagination from 'rc-pagination';
-import 'rc-pagination/assets/index.css';
+import Pagination from '@material-ui/lab/Pagination';
+import { ThemeProvider } from '@material-ui/styles';
+import { createMuiTheme } from '@material-ui/core';
 import Card from './components/Card';
 import Filter from './components/Filter';
 import { Cards, ContainerBody } from './theme/styled';
-import Swal from 'sweetalert2';
+import allActions from './store/actions';
+import { useSelector, useDispatch } from 'react-redux';
+
 //TODO: ajustar checkbox dos filtros(modal ou sidebar)
 //TODO: infinite scroll
 export default function App() {
 	const [movies, setMovies] = useState([]);
 	const [genres, setGenres] = useState([]);
 	const [loading, setLoading] = useState(false);
-	const [checked, setChecked] = useState({ id: 0, check: false });
-	const [pageCount, setPageCount] = useState(0);
-	const [filter, setFilter] = useState([]);
+
+	const filterState = useSelector((state) => state.filter.dados);
+	const pageState = useSelector((state) => state.pages.dados);
+
+	const [filter, setFilter] = useState(filterState);
 
 	useEffect(() => {
 		const getMovies = async () => {
@@ -23,36 +28,53 @@ export default function App() {
 			setMovies(res);
 			setGenres(resGenges.genres);
 			setLoading(true);
-			setPageCount(1);
 		};
 		getMovies();
-	}, [filter]);
+	}, [filterState]);
 
-	const handlePageClick = async (page) => {
-		const res = await getPopularMovie(page);
+	const dispatch = useDispatch();
+
+	const handlePageClick = async (page, value) => {
+		const res = await getPopularMovie(value);
 		setMovies(res);
 		setLoading(true);
-		setPageCount(page);
+
+		dispatch(allActions.pagesActions.definePage(value));
 	};
 
 	const handleFilter = (e) => {
 		const checkValue = Number(e.target.value);
+		const teste = e.target.checked;
 
-		setFilter([checkValue]);
+		if (!teste) {
+			dispatch(allActions.filterActions.removeFilter(checkValue));
+			setFilter(filterState);
+		} else {
+			setFilter([...filter, checkValue]);
+			dispatch(
+				allActions.filterActions.defineFilter([...filter, checkValue])
+			);
+		}
 	};
+
+	const theme = createMuiTheme({
+		palette: {
+			type: 'dark',
+		},
+	});
 	return (
-		<>
+		<ThemeProvider theme={theme}>
 			{loading ? (
 				<>
-					{genres.map((el) => (
+					{/* {genres.map((el) => (
 						<Filter
-							checked={checked}
 							setFilterValue={(e) => handleFilter(e)}
 							key={el.id}
 							nome={el.name}
 							value={el.id}
 						/>
-					))}
+					))} */}
+
 					<ContainerBody>
 						<Cards>
 							{movies.results.map((el) => (
@@ -65,13 +87,14 @@ export default function App() {
 							))}
 						</Cards>
 						<Pagination
+							color='primary'
+							count={movies.total_pages}
+							page={pageState}
 							onChange={handlePageClick}
-							current={pageCount}
-							total={movies.total_pages}
 						/>
 					</ContainerBody>
 				</>
 			) : null}
-		</>
+		</ThemeProvider>
 	);
 }
