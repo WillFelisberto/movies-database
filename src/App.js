@@ -19,7 +19,7 @@ export default function App() {
   const filterState = useSelector((state) => state.filter.dados);
   const pageState = useSelector((state) => state.pages.dados);
 
-  const [filter, setFilter] = useState(filterState);
+  const [filter] = useState(filterState);
 
   useEffect(() => {
     const getMovies = async () => {
