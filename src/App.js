@@ -23,15 +23,14 @@ export default function App() {
 
   useEffect(() => {
     const getMovies = async () => {
-      const res = await getPopularMovie();
+      const res = await getPopularMovie(pageState);
       const resGenges = await getGenres();
       setMovies(res);
       setGenres(resGenges.genres);
       setLoading(true);
     };
     getMovies();
-  }, [filterState]);
-
+  }, [filterState, pageState]);
   const dispatch = useDispatch();
 
   const handlePageClick = async (page, value) => {
