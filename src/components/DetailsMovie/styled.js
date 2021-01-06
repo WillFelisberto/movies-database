@@ -24,7 +24,7 @@ export const ContainerImg = styled.div`
 		max-width: 100%;
 	}
 
-	width: 40%;
+	width: 30%;
 
 	@media (max-width: 768px) {
 		width: 100%;

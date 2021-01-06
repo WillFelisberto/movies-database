@@ -5,7 +5,6 @@ export const ContainerFooter = styled.footer`
 	text-align: center;
 	background-color: #d9d9d9;
 	font-size: 25px;
-	position: fixed;
 	width: 100%;
 	left: 0;
 	bottom: 0;
