@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 
 export const ContainerHeader = styled.header`
-	text-align: center;
 	color: white;
-	font-size: 25px;
-
+	background-image: linear-gradient(to right, #354c58, #18232c);
 	a {
-		padding: 0px 10px;
+		padding: 15px 30px;
+	}
+
+	div {
+		display: flex;
+		flex-direction: row;
+		justify-content: end;
 	}
 `;
