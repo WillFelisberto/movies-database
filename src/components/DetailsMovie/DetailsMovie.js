@@ -37,7 +37,6 @@ export default function DetailsMovie() {
 				.join(', ')
 		: null;
 
-	console.log(movieVideos);
 	return (
 		<>
 			{!loading && movieVideos.length > 0 ? null : (
