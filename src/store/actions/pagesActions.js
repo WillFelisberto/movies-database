@@ -5,6 +5,6 @@ const definePage = (dados) => {
 	};
 };
 
-const filterActions = { definePage };
+const pagesActions = { definePage };
 
-export default filterActions;
+export default pagesActions;
