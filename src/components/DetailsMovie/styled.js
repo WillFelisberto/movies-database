@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const ContainerDetails = styled.div`
-	display: flex;
+	/* display: flex;
 	flex-flow: row;
-	flex-wrap: wrap;
+	flex-wrap: wrap; */
 	margin: 50px 15%;
-	align-items: center;
+	/* align-items: center; */
 	/* @media (max-width: 768px) {
 		padding: 0px 5%;
 	}

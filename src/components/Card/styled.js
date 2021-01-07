@@ -22,7 +22,7 @@ export const ContainerCard = styled.div`
 	}
 
 	img {
-		object-fit: contain;
+		object-fit: cover;
 		max-width: 100%;
 		max-height: 100%;
 		box-shadow: 0px 0px 20px 0px #000000de;
