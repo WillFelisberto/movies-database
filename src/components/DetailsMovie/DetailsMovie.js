@@ -16,7 +16,6 @@ export default function DetailsMovie() {
 	const [movieDetails, setMovieDetails] = useState([]);
 	const [movieVideos, setMovieVideos] = useState([]);
 	const [loading, setLoading] = useState(false);
-	const { data } = usePalette(IMG_URL + movieDetails.poster_path);
 
 	useEffect(() => {
 		const getDetails = async () => {
@@ -29,6 +28,7 @@ export default function DetailsMovie() {
 		getDetails();
 	}, [id]);
 
+	const { data } = usePalette(IMG_URL + movieDetails.poster_path);
 	const listaGenero = movieDetails.genres
 		? Array.prototype.map
 				.call(movieDetails.genres, function (item) {
@@ -37,9 +37,10 @@ export default function DetailsMovie() {
 				.join(', ')
 		: null;
 
+	console.log(movieVideos);
 	return (
 		<>
-			{!loading && movieVideos.length > 0 ? null : (
+			{!loading && movieVideos.length === 0 && !movieDetails ? null : (
 				<ContainerDetails>
 					<ContainerImg
 						style={{
@@ -66,14 +67,16 @@ export default function DetailsMovie() {
 						</div>
 						<div className='overview'>{movieDetails.overview}</div>
 						<div className='trailer'>
-							<Buttom>
-								<a
-									target='_blank'
-									rel='noopener noreferrer'
-									href={`https://www.youtube.com/watch?v=${movieVideos[0].key}`}>
-									<strong>Trailer</strong>
-								</a>
-							</Buttom>
+							{movieVideos[0] && movieVideos[0].key ? (
+								<Buttom>
+									<a
+										target='_blank'
+										rel='noopener noreferrer'
+										href={`https://www.youtube.com/watch?v=${movieVideos[0].key}`}>
+										<strong>Trailer</strong>
+									</a>
+								</Buttom>
+							) : null}
 							<a
 								target='_blank'
 								rel='noopener noreferrer'
