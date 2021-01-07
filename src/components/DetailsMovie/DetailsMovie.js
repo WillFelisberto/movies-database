@@ -37,10 +37,11 @@ export default function DetailsMovie() {
 				.join(', ')
 		: null;
 
-	console.log(movieVideos);
 	return (
 		<>
-			{!loading && movieVideos.length === 0 && !movieDetails ? null : (
+			{!loading &&
+			movieVideos.length === 0 &&
+			movieDetails.length === 0 ? null : (
 				<ContainerDetails>
 					<ContainerImg
 						style={{
