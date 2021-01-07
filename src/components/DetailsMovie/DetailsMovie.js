@@ -39,9 +39,7 @@ export default function DetailsMovie() {
 
 	return (
 		<>
-			{!loading &&
-			movieVideos.length === 0 &&
-			movieDetails.length < 0 ? null : (
+			{!loading ? null : (
 				<ContainerDetails>
 					<ContainerImg
 						style={{
