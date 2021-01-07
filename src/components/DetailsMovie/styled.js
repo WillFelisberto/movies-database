@@ -5,13 +5,24 @@ export const ContainerDetails = styled.div`
 	flex-flow: row;
 	flex-wrap: wrap;
 	margin: 50px 15%;
+	align-items: center;
 	/* @media (max-width: 768px) {
 		padding: 0px 5%;
 	}
 	padding: 0px 15%; */
+	min-height: calc(86vh - 68px);
 	@media (max-width: 768px) {
 		flex-direction: row;
 		margin: 50px 5%;
+	}
+
+	.displayMobile {
+		display: flex;
+		height: 100%;
+
+		@media (max-width: 768px) {
+			flex-direction: column;
+		}
 	}
 `;
 
@@ -22,6 +33,8 @@ export const ContainerImg = styled.div`
 	justify-content: space-around;
 	img {
 		max-width: 100%;
+		width: 100%;
+		object-fit: contain;
 	}
 
 	width: 30%;
@@ -88,7 +101,7 @@ export const ContainerInfos = styled.div`
 	}
 `;
 
-export const Buttom = styled.button`
+export const Buttom = styled.a`
 	transition-duration: 0.4s;
 	border: 2px solid #e6b91e;
 	color: #e6b91e;
@@ -96,7 +109,8 @@ export const Buttom = styled.button`
 	border-radius: 5px;
 	padding: 0px 20px;
 	cursor: pointer;
-
+	text-align: center;
+	line-height: 35px;
 	:hover {
 		background-color: #e6b91e;
 		color: black;

@@ -47,10 +47,22 @@ export const get404Page = async (tag) => {
 		throw error;
 	}
 };
+
 export const getVideo = async (id) => {
 	try {
 		const response = await api.get(
 			`/movie/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=pt-BR`
+		);
+		return response.data.results;
+	} catch (error) {
+		throw error;
+	}
+};
+
+export const getNowPlaying = async () => {
+	try {
+		const response = await api.get(
+			`/movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}&language=pt-BR&page=1&region=BR`
 		);
 		return response.data.results;
 	} catch (error) {

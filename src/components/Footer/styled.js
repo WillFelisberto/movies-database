@@ -6,14 +6,10 @@ export const ContainerFooter = styled.footer`
 	background-color: #d9d9d9;
 	font-size: 25px;
 	width: 100%;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	background-image: linear-gradient(to right, #354c58, #18232c);
 
-	@media (max-width: 768px) {
-		position: static;
-	}
+	background-image: linear-gradient(to right, #354c58, #18232c);
+	margin-top: auto;
+
 	a {
 		padding: 0px 10px;
 	}

@@ -9,8 +9,12 @@ export const ContainerCard = styled.div`
 	color: white;
 	padding-bottom: 45px;
 	margin-bottom: 80px;
-	@media only screen and (min-width: 768px) {
+	@media (min-width: 768px) {
 		max-width: 50%;
+	}
+
+	@media (max-width: 768px) {
+		width: 25%;
 	}
 
 	@media only screen and (min-width: 1200px) {
@@ -18,12 +22,10 @@ export const ContainerCard = styled.div`
 	}
 
 	img {
+		object-fit: contain;
+		max-width: 100%;
+		max-height: 100%;
 		box-shadow: 0px 0px 20px 0px #000000de;
-
-		width: 100%;
-		height: 100%;
-		width: 100%;
-		object-fit: cover;
 	}
 `;
 

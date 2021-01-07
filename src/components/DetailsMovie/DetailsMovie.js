@@ -41,51 +41,53 @@ export default function DetailsMovie() {
 		<>
 			{!loading ? null : (
 				<ContainerDetails>
-					<ContainerImg
-						style={{
-							boxShadow: `0px 0px 20px 0px ${data.vibrant}`,
-						}}>
-						<img
-							alt={movieDetails.title}
-							src={IMG_URL + movieDetails.poster_path}></img>
-					</ContainerImg>
-					<ContainerInfos>
-						<div className='movieTitle'>
-							<h1>{movieDetails.title}</h1>
-							<span style={{ fontSize: 14 }}>
-								{movieDetails.tagline}
-							</span>
-						</div>
+					<div className='displayMobile'>
+						<ContainerImg
+							style={{
+								boxShadow: `0px 0px 20px 0px ${data.vibrant}`,
+							}}>
+							<img
+								alt={movieDetails.title}
+								src={IMG_URL + movieDetails.poster_path}></img>
+						</ContainerImg>
+						<ContainerInfos>
+							<div className='movieTitle'>
+								<h1>{movieDetails.title}</h1>
+								<span style={{ fontSize: 14 }}>
+									{movieDetails.tagline}
+								</span>
+							</div>
 
-						<div className='subtitle'>
-							<span>
-								{movieDetails.release_date.split('-')[0]}
-							</span>
-							<span>{movieDetails.runtime} min</span>
-							<span>{listaGenero}</span>
-						</div>
-						<div className='overview'>{movieDetails.overview}</div>
-						<div className='trailer'>
-							{movieVideos[0] && movieVideos[0].key ? (
-								<Buttom>
-									<a
+							<div className='subtitle'>
+								<span>
+									{movieDetails.release_date.split('-')[0]}
+								</span>
+								<span>{movieDetails.runtime} min</span>
+								<span>{listaGenero}</span>
+							</div>
+							<div className='overview'>
+								{movieDetails.overview}
+							</div>
+							<div className='trailer'>
+								{movieVideos[0] && movieVideos[0].key ? (
+									<Buttom
 										target='_blank'
 										rel='noopener noreferrer'
 										href={`https://www.youtube.com/watch?v=${movieVideos[0].key}`}>
 										<strong>Trailer</strong>
-									</a>
-								</Buttom>
-							) : null}
-							<a
-								target='_blank'
-								rel='noopener noreferrer'
-								href={`https://www.imdb.com/title/${movieDetails.imdb_id}`}>
-								<img
-									src={LogoIMDB}
-									alt={movieDetails.title}></img>
-							</a>
-						</div>
-					</ContainerInfos>
+									</Buttom>
+								) : null}
+								<a
+									target='_blank'
+									rel='noopener noreferrer'
+									href={`https://www.imdb.com/title/${movieDetails.imdb_id}`}>
+									<img
+										src={LogoIMDB}
+										alt={movieDetails.title}></img>
+								</a>
+							</div>
+						</ContainerInfos>
+					</div>
 				</ContainerDetails>
 			)}
 		</>
