@@ -55,27 +55,25 @@ export default function Banner() {
 	const FilterPlayingMovies = playing.filter((el) => el.backdrop_path);
 
 	return (
-		<Slider {...settings}>
-			{FilterPlayingMovies.map((el, index) => (
-				<Moviecard key={index}>
-					<div className='info_section'>
-						<Link title={el.title} to={`/movie/` + el.id}>
-							<img
-								alt={el.title}
-								src={IMG_URL + el.backdrop_path}></img>
-							<div className='movie_header'>
-								<span>{el.title}</span>
+		<>
+			{loading ? (
+				<Slider {...settings}>
+					{FilterPlayingMovies.map((el, index) => (
+						<Moviecard key={index}>
+							<div className='info_section'>
+								<Link title={el.title} to={`/movie/` + el.id}>
+									<img
+										alt={el.title}
+										src={IMG_URL + el.backdrop_path}></img>
+									<div className='movie_header'>
+										<span>{el.title}</span>
+									</div>
+								</Link>
 							</div>
-						</Link>
-					</div>
-				</Moviecard>
-				// <div key={index} style={{ display: 'flex !important' }}>
-				// 	<img
-				// 		alt={el.original_title}
-				// 		src={IMG_URL + el.backdrop_path}></img>
-				// 	<h3>	</h3>
-				// </div>
-			))}
-		</Slider>
+						</Moviecard>
+					))}
+				</Slider>
+			) : null}
+		</>
 	);
 }

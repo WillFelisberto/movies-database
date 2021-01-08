@@ -28,7 +28,7 @@ export default function Search() {
 				<>
 					<BreadCrumbs>
 						<strong>{movies.total_results} </strong> records were
-						found for the word <strong> {searchWord.query}</strong>
+						found for <strong> {searchWord.query}</strong>
 					</BreadCrumbs>
 					<MovieList defaultMovies={movies}></MovieList>
 				</>
