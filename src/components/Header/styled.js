@@ -30,6 +30,9 @@ export const SearchBar = styled.div`
 	align-self: center;
 
 	form {
+		@media (max-width: 768px) {
+			padding-bottom: 15px;
+		}
 		display: flex;
 	}
 

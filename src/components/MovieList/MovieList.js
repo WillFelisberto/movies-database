@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { getPopularMovie, getGenres } from '../../api/services';
 import { Cards, ContainerBody } from './styled';
@@ -6,31 +7,38 @@ import { useSelector, useDispatch } from 'react-redux';
 import allActions from '../../store/actions';
 import Pagination from '@material-ui/lab/Pagination';
 
-export default function Home() {
+export default function MovieList({ defaultMovies }) {
 	const [movies, setMovies] = useState([]);
 	const [genres, setGenres] = useState([]);
+	const [useSearch, setUseSearch] = useState(defaultMovies ? true : false);
 	const [loading, setLoading] = useState(false);
 	const dispatch = useDispatch();
 	const pageState = useSelector((state) => state.pages.dados);
 	const filterState = useSelector((state) => state.filter.dados);
+
 	const [filter] = useState(filterState);
 
 	useEffect(() => {
-		const getMovies = async () => {
-			const res = await getPopularMovie(pageState);
-			const resGenges = await getGenres();
-			setMovies(res);
-			setGenres(resGenges.genres);
+		if (defaultMovies && defaultMovies.results.length > 0) {
+			setMovies(defaultMovies);
 			setLoading(true);
-		};
-		getMovies();
-	}, [filterState, pageState]);
+			setUseSearch(true);
+		} else {
+			const getMovies = async () => {
+				const res = await getPopularMovie(pageState);
+				const resGenges = await getGenres();
+				setMovies(res);
+				setGenres(resGenges.genres);
+				setLoading(true);
+			};
+			getMovies();
+		}
+	}, [filterState, pageState, defaultMovies]);
 
 	const handlePageClick = async (page, value) => {
 		const res = await getPopularMovie(value);
 		setMovies(res);
 		setLoading(true);
-
 		dispatch(allActions.pagesActions.definePage(value));
 	};
 	// const handleFilter = (e) => {
@@ -47,6 +55,7 @@ export default function Home() {
 	// 		);
 	// 	}
 	// };
+
 	return (
 		<>
 			{loading ? (

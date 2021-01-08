@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import { getNowPlaying } from '../../api/services';
 import { IMG_URL } from '../../utils';
+import { Link } from 'react-router-dom';
 import { Moviecard } from './styled';
 
 export default function Banner() {
@@ -21,9 +22,34 @@ export default function Banner() {
 		dots: false,
 		infinite: true,
 		speed: 500,
-		slidesToShow: 1,
-		slidesToScroll: 1,
+		slidesToShow: 3,
+		slidesToScroll: 3,
 		arrows: false,
+		responsive: [
+			{
+				breakpoint: 1024,
+				settings: {
+					slidesToShow: 3,
+					slidesToScroll: 3,
+					infinite: true,
+				},
+			},
+			{
+				breakpoint: 600,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 2,
+					initialSlide: 2,
+				},
+			},
+			{
+				breakpoint: 480,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1,
+				},
+			},
+		],
 	};
 
 	const FilterPlayingMovies = playing.filter((el) => el.backdrop_path);
@@ -31,11 +57,16 @@ export default function Banner() {
 	return (
 		<Slider {...settings}>
 			{FilterPlayingMovies.map((el, index) => (
-				<Moviecard img={IMG_URL + el.backdrop_path} key={index}>
+				<Moviecard key={index}>
 					<div className='info_section'>
-						<div className='movie_header'>
-							<h1>{el.title}</h1>
-						</div>
+						<Link title={el.title} to={`/movie/` + el.id}>
+							<img
+								alt={el.title}
+								src={IMG_URL + el.backdrop_path}></img>
+							<div className='movie_header'>
+								<span>{el.title}</span>
+							</div>
+						</Link>
 					</div>
 				</Moviecard>
 				// <div key={index} style={{ display: 'flex !important' }}>

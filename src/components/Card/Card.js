@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { IMG_URL } from '../../utils';
 import { ContainerCard, ContainerGeneros, TituloFilme, Nota } from './styled';
+import NoImage from '../../assets/img/noimage.png';
 
 export default function Card({ movie, Allgenres, filter }) {
 	let result = movie.genre_ids.filter((o1) => filter.some((o2) => o1 === o2));
@@ -21,7 +22,14 @@ export default function Card({ movie, Allgenres, filter }) {
 				<Nota>
 					<div>{movie.vote_average.toFixed(1)}</div>
 				</Nota>
-				<img alt={movie.title} src={IMG_URL + movie.poster_path} />
+				<img
+					alt={movie.title}
+					src={
+						movie.poster_path
+							? IMG_URL + movie.poster_path
+							: NoImage
+					}
+				/>
 
 				<TituloFilme>{movie.title}</TituloFilme>
 				<ContainerGeneros>

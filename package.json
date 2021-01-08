@@ -9,6 +9,7 @@
 		"@testing-library/react": "^11.1.0",
 		"@testing-library/user-event": "^12.1.10",
 		"axios": "^0.21.0",
+		"query-string": "^6.13.8",
 		"rc-checkbox": "^2.3.2",
 		"rc-pagination": "^3.1.2",
 		"react": "^17.0.1",

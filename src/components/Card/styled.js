@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const ContainerCard = styled.div`
 	display: inline-block;
-	flex-grow: 1;
 	margin: 20px;
 	text-align: center;
 	border-radius: 10px;
@@ -14,7 +13,7 @@ export const ContainerCard = styled.div`
 	}
 
 	@media (max-width: 768px) {
-		width: 25%;
+		width: 35%;
 	}
 
 	@media only screen and (min-width: 1200px) {

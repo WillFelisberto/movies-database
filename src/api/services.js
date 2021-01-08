@@ -70,12 +70,12 @@ export const getNowPlaying = async () => {
 	}
 };
 
-export const getSearchMovie = async (term) => {
+export const getSearchMovie = async (term, page = 1) => {
 	try {
 		const response = await api.get(
-			`/search/movie?api_key=${process.env.REACT_APP_API_KEY}&language=pt-BR&query=${term}&page=1&include_adult=false&region=BR`
+			`/search/movie?api_key=${process.env.REACT_APP_API_KEY}&language=pt-BR&query=${term}&page=${page}&include_adult=false&region=BR`
 		);
-		return response.data.results;
+		return response.data;
 	} catch (error) {
 		throw error;
 	}
