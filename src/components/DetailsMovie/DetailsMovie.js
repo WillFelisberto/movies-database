@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { getMovieDetails, getVideo } from '../../api/services';
 import { IMG_URL } from '../../utils';
 import {
 	ContainerImg,
@@ -10,23 +9,36 @@ import {
 } from './styled';
 import { usePalette } from 'react-palette';
 import LogoIMDB from '../../assets/img/imdb.png';
+import { carregaDetailMovie } from '../../store/movie/actions';
+import { carregaMovieVideos } from '../../store/videos/actions';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function DetailsMovie() {
 	let { id } = useParams();
+	const dispatch = useDispatch();
+	const filmeDetails = useSelector((state) => state.movieDetails);
+	const filmeVideos = useSelector((state) => state.videos);
+
 	const [movieDetails, setMovieDetails] = useState([]);
 	const [movieVideos, setMovieVideos] = useState([]);
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
-		const getDetails = async () => {
-			const res = await getMovieDetails(id);
-			const videos = await getVideo(id);
-			setMovieDetails(res);
-			setMovieVideos(videos);
+		if (
+			(!filmeDetails.loaded && !filmeDetails.loading) ||
+			(!filmeVideos.loaded && !filmeVideos.loading)
+		) {
+			dispatch(carregaDetailMovie(id));
+			dispatch(carregaMovieVideos(id));
+		} else if (
+			(filmeDetails.loaded && !filmeDetails.loading) ||
+			(filmeVideos.loaded && !filmeVideos.loading)
+		) {
+			setMovieDetails(filmeDetails.dados);
+			setMovieVideos(filmeVideos.dados);
 			setLoading(true);
-		};
-		getDetails();
-	}, [id]);
+		}
+	}, [id, dispatch, filmeDetails, filmeVideos]);
 
 	const { data } = usePalette(IMG_URL + movieDetails.poster_path);
 	const listaGenero = movieDetails.genres

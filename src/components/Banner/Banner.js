@@ -4,19 +4,24 @@ import { getNowPlaying } from '../../api/services';
 import { IMG_URL } from '../../utils';
 import { Link } from 'react-router-dom';
 import { Moviecard } from './styled';
+import { carregaBanners } from '../../store/banner/actions';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Banner() {
+	const getBanners = useSelector((state) => state.banner);
+
 	const [playing, setPlaying] = useState([]);
 	const [loading, setLoading] = useState(false);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		const getPlaying = async () => {
-			const res = await getNowPlaying();
-			setPlaying(res);
+		if (!getBanners.loaded && !getBanners.loading) {
+			dispatch(carregaBanners());
+		} else if (getBanners.loaded && !getBanners.loading) {
+			setPlaying(getBanners.dados);
 			setLoading(true);
-		};
-		getPlaying();
-	}, []);
+		}
+	}, [getBanners, dispatch]);
 
 	var settings = {
 		dots: false,

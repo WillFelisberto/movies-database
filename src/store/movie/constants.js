@@ -1,0 +1,4 @@
+export const REQUEST_MOVIE = 'REQUEST_MOVIE';
+export const SUCCESS_MOVIE = 'SUCCESS_MOVIE';
+export const FAILURE_MOVIE = 'FAILURE_MOVIE';
+export const CLEAR_MOVIE = 'CLEAR_MOVIE';

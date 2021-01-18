@@ -2,8 +2,8 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { ContainerHeader, SearchBar } from './styled';
 import { useDispatch } from 'react-redux';
-import allActions from '../../store/actions';
 import { useSelector } from 'react-redux';
+import { defineSearch } from '../../store/search/actions';
 
 export default function Header() {
 	const dispatch = useDispatch();
@@ -13,7 +13,7 @@ export default function Header() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const searchTerm = e.target.search.value;
-		dispatch(allActions.searchActions.defineSearch(searchTerm));
+		dispatch(defineSearch(searchTerm));
 		history.push(`/busca/q?query=${searchTerm}`);
 	};
 
